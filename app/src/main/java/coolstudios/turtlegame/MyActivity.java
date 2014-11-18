@@ -35,4 +35,9 @@ public class MyActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void tryMethod ()
+    {
+        String hi = "Hello!";
+    }
 }
