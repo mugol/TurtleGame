@@ -2,7 +2,14 @@
 <resources>
 
     <string name="app_name">TurtleGame</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="gameTitle">Timmy the Tiny Turtle</string>
     <string name="action_settings">Settings</string>
+    <string name="story_button">Story Mode</string>
+    <string name="survival_button">Survival Mode</string>
+    <string name="option_button">Options</string>
+    <string name="title_activity_gameplay_screen">Gameplay Screen</string>
+    <string name="title_activity_story_mode">Story Mode Activity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

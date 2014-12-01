@@ -8,8 +8,43 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MyActivity">
     <TextView
-    android:text="@string/hello_world"
+    android:text="@string/gameTitle"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="67dp"
+        android:textSize="30dp"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/story_button"
+        android:id="@+id/start_button"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="126dp"
+        android:onClick="startGame" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/survival_button"
+        android:id="@+id/survivalButton"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/start_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/option_button"
+        android:id="@+id/optionButton"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/survivalButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

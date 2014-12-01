@@ -8,13 +8,31 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MyActivity"
+            android:name="coolstudios.turtlegame.MyActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="coolstudios.turtlegame.GameplayScreen"
+            android:label="@string/title_activity_gameplay_screen"
+            android:parentActivityName="coolstudios.turtlegame.MyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="coolstudios.turtlegame.MyActivity" />
+        </activity>
+        <activity
+            android:name="coolstudios.turtlegame.StoryModeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_story_mode"
+            android:parentActivityName="coolstudios.turtlegame.MyActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="coolstudios.turtlegame.MyActivity" />
         </activity>
     </application>
 

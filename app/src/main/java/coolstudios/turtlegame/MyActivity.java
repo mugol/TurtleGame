@@ -1,9 +1,11 @@
 package coolstudios.turtlegame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MyActivity extends Activity {
@@ -36,8 +38,9 @@ public class MyActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tryMethod ()
+    public void startGame (View view)
     {
-        String hi = "Hello!";
+        Intent mainGame = new Intent(this, StoryModeActivity.class);
+        startActivity(mainGame);
     }
 }
