@@ -38,9 +38,21 @@ public class MyActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startGame (View view)
+    public void storyMode (View view)
     {
-        Intent mainGame = new Intent(this, StoryModeActivity.class);
-        startActivity(mainGame);
+        Intent storyGame = new Intent(this, StoryModeActivity.class);
+        startActivity(storyGame);
+    }
+
+    public void survivalMode (View view)
+    {
+        Intent survivalGame = new Intent(this, SurvivalModeActivity.class);
+        startActivity(survivalGame);
+    }
+
+    public void options (View view)
+    {
+        Intent optionPage = new Intent(this, OptionsActivity.class);
+        startActivity(optionPage);
     }
 }

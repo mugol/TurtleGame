@@ -19,7 +19,7 @@ import android.support.v4.app.NavUtils;
  *
  * @see SystemUiHider
  */
-public class StoryModeActivity extends Activity {
+public class SurvivalModeActivity extends Activity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -52,7 +52,7 @@ public class StoryModeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_story_mode);
+        setContentView(R.layout.activity_survival_mode);
         setupActionBar();
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
@@ -141,7 +141,7 @@ public class StoryModeActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
+        int id = item.getItemId();
         if (id == android.R.id.home) {
             // This ID represents the Home or Up button. In the case of this
             // activity, the Up button is shown. Use NavUtils to allow users
@@ -164,9 +164,9 @@ public class StoryModeActivity extends Activity {
      * while interacting with activity UI.
      */
     View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    if (AUTO_HIDE) {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (AUTO_HIDE) {
                 delayedHide(AUTO_HIDE_DELAY_MILLIS);
             }
             return false;

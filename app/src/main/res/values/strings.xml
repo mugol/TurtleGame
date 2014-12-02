@@ -11,5 +11,9 @@
     <string name="title_activity_story_mode">Story Mode Activity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_options">Options Activity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_survival_mode">Survival Mode Activity</string>
 
 </resources>
