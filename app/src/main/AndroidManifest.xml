@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="coolstudios.turtlegame" >
 
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="coolstudios.turtlegame.MyActivity"
+            android:name=".MyActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,48 +18,48 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="coolstudios.turtlegame.GameplayScreen"
+            android:name=".GameplayScreen"
             android:label="@string/title_activity_gameplay_screen"
-            android:parentActivityName="coolstudios.turtlegame.MyActivity" >
+            android:parentActivityName=".MyActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="coolstudios.turtlegame.MyActivity" />
         </activity>
         <activity
-            android:name="coolstudios.turtlegame.StoryModeActivity"
+            android:name=".StoryModeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_story_mode"
-            android:parentActivityName="coolstudios.turtlegame.MyActivity"
+            android:parentActivityName=".MyActivity"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="coolstudios.turtlegame.MyActivity" />
         </activity>
         <activity
-            android:name="coolstudios.turtlegame.OptionActivity"
+            android:name=".OptionActivity"
             android:label="@string/title_activity_option"
-            android:parentActivityName="coolstudios.turtlegame.MyActivity" >
+            android:parentActivityName=".MyActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="coolstudios.turtlegame.MyActivity" />
         </activity>
         <activity
-            android:name="coolstudios.turtlegame.OptionsActivity"
+            android:name=".OptionsActivity"
             android:label="@string/title_activity_options" >
         </activity>
         <activity
-            android:name="coolstudios.turtlegame.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:parentActivityName="coolstudios.turtlegame.MyActivity" >
+            android:parentActivityName=".MyActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="coolstudios.turtlegame.MyActivity" />
         </activity>
         <activity
-            android:name="coolstudios.turtlegame.SurvivalModeActivity"
+            android:name=".SurvivalModeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_survival_mode"
-            android:parentActivityName="coolstudios.turtlegame.MyActivity"
+            android:parentActivityName=".MyActivity"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

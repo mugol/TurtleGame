@@ -15,5 +15,7 @@
     <string name="title_activity_options">Options Activity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_survival_mode">Survival Mode Activity</string>
+    <string name="title_activity_open_glplease_work">OpenGLPleaseWork</string>
+    <string name="title_activity_open_gl_please_work">openGlPleaseWork</string>
 
 </resources>
