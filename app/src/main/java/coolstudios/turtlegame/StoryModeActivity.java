@@ -1,20 +1,30 @@
 package coolstudios.turtlegame;
 
 import android.app.Activity;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class StoryModeActivity extends Activity {
+public class StoryModeActivity extends Activity{
 
-    private GLSurfaceView MLGView;
+    OurView v;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MLGView = new MyGLSurfaceView(this);
-        setContentView(MLGView);
+        v = new OurView(this);
+        setContentView(v);
+    }
+
+    protected void onPause(){
+        super.onPause();
+        v.pause();
+    }
+
+    protected void onResume(){
+        super.onResume();
+        v.resume();
     }
 
 
@@ -37,6 +47,8 @@ public class StoryModeActivity extends Activity {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
     }
 }
+
