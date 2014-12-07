@@ -17,16 +17,17 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
     SurfaceHolder holder;
     boolean isItOK = false;
     Canvas c;
-    ArrayList<Character> dudeList;
+    Character crab;
     Character turtle;
-    int crabCount = 0;
+    float temp;
 
     public OurView(Context context){
         super(context);
         holder = getHolder();
+
+        //first spawn for the characters
         turtle = new Character(0, 0, 0, 0, BitmapFactory.decodeResource(getResources(), R.drawable.turtle));
-        dudeList = new ArrayList<Character>();
-        dudeList.add(new Character(50, 50, 1000, 0, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)));
+        crab = new Character(75, 150, 1000, 150, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
         setOnTouchListener(this);
     }
 
@@ -37,27 +38,25 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
             }
 
             c = holder.lockCanvas();
-            if(System.currentTimeMillis() > 10000 && crabCount == 0)
-            {
-                dudeList.get(1).setX(0);
-                dudeList.get(1).setY((float)(Math.random() * (c.getHeight() - 100)));
-                crabCount++;
-            }
             c.drawARGB(255, 150, 150, 10);
+            //moves the characters
             moveCharacter(turtle);
-            for(Character ch : dudeList)
-            {
-                moveCharacter(ch);
-                if(Math.sqrt(Math.pow(turtle.getX() - ch.getX(), 2) + Math.pow(turtle.getX() - ch.getX(), 2)) < turtle.getSize() + ch.getSize())
+            moveCharacter(crab);
+
+                //hit detection - right now the game just pauses when hit
+                if(turtle.getX() >= crab.getX() && turtle.getX() <= (crab.getX() + crab.getImage().getWidth()) && turtle.getY() <= crab.getY() + crab.getImage().getHeight() && turtle.getY() >= crab.getY())
                 {
-                    isItOK = false;
+                   isItOK = false;
                 }
-                if(ch.getX() > c.getWidth() || ch.getX() > c.getHeight())
+
+                //Respawns the crab on the other side of the ma
+                if((crab.getX() > c.getWidth() || crab.getX() > c.getHeight()) || ((crab.getX() < 0 || crab.getY() < 0)))
                 {
-                    ch.setX(0);
-                    ch.setY((float) (Math.random() * (c.getHeight() - 100)));
+                    crab.setX(1);
+                    temp = (float) (Math.random() * (c.getHeight() - 100));
+                    crab.setY(temp);
+                    crab.move(1000, temp);
                 }
-            }
             draw(c);
             holder.unlockCanvasAndPost(c);
         }
@@ -66,9 +65,7 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
     public void draw(Canvas canvas){
 
         //draws the character
-        for(Character ch : dudeList) {
-            c.drawBitmap(ch.getImage(),ch.getX() - (ch.getImage().getWidth()/2), ch.getY() - (ch.getImage().getHeight()/2), null);
-        }
+        c.drawBitmap(crab.getImage(),crab.getX() - (crab.getImage().getWidth()/2), crab.getY() - (crab.getImage().getHeight()/2), null);
         c.drawBitmap(turtle.getImage(), turtle.getX() - (turtle.getImage().getWidth()/2), turtle.getY() - (turtle.getImage().getHeight()/2), null);
 
     }
