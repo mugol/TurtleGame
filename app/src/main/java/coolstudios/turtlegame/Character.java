@@ -2,13 +2,11 @@ package coolstudios.turtlegame;
 
 import android.graphics.Bitmap;
 
-/**
- * Created by WilliamRandazzo on 12/1/2014.
- */
 public class Character {
     Bitmap image;
     final float speed = 10;
     float x, y, desX, desY;
+    final float size = 50;
 
     //Empty Constructor, sets everything to zero.
     public Character() {
@@ -19,11 +17,15 @@ public class Character {
     }
 
     //general constructor, allows you to set all of a character's variables.
-    public Character(float xPos, float yPos, Bitmap newImage) {
+    public Character(float xPos, float yPos, float newDesX, float newDesY, Bitmap newImage) {
         image = newImage;
         x = xPos;
         y = yPos;
+        desX = newDesX;
+        desY = newDesY;
     }
+
+
 
     public Bitmap getImage() {
         return image;
@@ -47,6 +49,10 @@ public class Character {
 
     public float getY() {
         return y;
+    }
+
+    public float getSize() {
+        return size;
     }
 
     public void setX(float x) {
