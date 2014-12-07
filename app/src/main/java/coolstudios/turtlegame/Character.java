@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 
 public class Character {
     Bitmap image;
-    final float speed = 10;
-    float x, y, desX, desY;
-    final float size = 50;
+    float x, y, desX, desY, speed;
 
     //Empty Constructor, sets everything to zero.
     public Character() {
@@ -14,15 +12,17 @@ public class Character {
         y = 0;
         desX = 0;
         desY = 0;
+        speed = 0;
     }
 
     //general constructor, allows you to set all of a character's variables.
-    public Character(float xPos, float yPos, float newDesX, float newDesY, Bitmap newImage) {
+    public Character(float xPos, float yPos, float newDesX, float newDesY, float newSpeed, Bitmap newImage) {
         image = newImage;
         x = xPos;
         y = yPos;
         desX = newDesX;
         desY = newDesY;
+        speed = newSpeed;
     }
 
 
@@ -51,10 +51,6 @@ public class Character {
         return y;
     }
 
-    public float getSize() {
-        return size;
-    }
-
     public void setX(float x) {
         this.x = x;
     }
@@ -62,6 +58,15 @@ public class Character {
     public void setY(float y) {
         this.y = y;
     }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
     public void move(float newX, float newY)
     {
         desX = newX;

@@ -19,15 +19,18 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
     Canvas c;
     Character crab;
     Character turtle;
+    Character bird;
     float temp;
+
 
     public OurView(Context context){
         super(context);
         holder = getHolder();
 
         //first spawn for the characters
-        turtle = new Character(0, 0, 0, 0, BitmapFactory.decodeResource(getResources(), R.drawable.turtle));
-        crab = new Character(75, 150, 1000, 150, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+        turtle = new Character(0, 0, 0, 0, 10, BitmapFactory.decodeResource(getResources(), R.drawable.turtle));
+        crab = new Character(0, 150, 1000, 150, 7, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+        bird = new Character(200, 400, turtle.getX(), turtle.getY(), 7, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
         setOnTouchListener(this);
     }
 
@@ -42,21 +45,30 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
             //moves the characters
             moveCharacter(turtle);
             moveCharacter(crab);
+            //birds needs turtle's location constantly
+            bird.move(turtle.getX(),turtle.getY());
+            moveCharacter(bird);
 
-                //hit detection - right now the game just pauses when hit
-                if(turtle.getX() >= crab.getX() && turtle.getX() <= (crab.getX() + crab.getImage().getWidth()) && turtle.getY() <= crab.getY() + crab.getImage().getHeight() && turtle.getY() >= crab.getY())
-                {
-                   isItOK = false;
-                }
+            //checkCollision returns true if hit, and isItOK needs to be false to stop
+            isItOK = !checkCollision(turtle, crab);
+            isItOK = !checkCollision(turtle, bird);
 
-                //Respawns the crab on the other side of the ma
-                if((crab.getX() > c.getWidth() || crab.getX() > c.getHeight()) || ((crab.getX() < 0 || crab.getY() < 0)))
-                {
-                    crab.setX(1);
-                    temp = (float) (Math.random() * (c.getHeight() - 100));
-                    crab.setY(temp);
-                    crab.move(1000, temp);
-                }
+            //Respawns the crab on the other side of the map
+            if((crab.getX() > c.getWidth() || crab.getX() > c.getHeight()) || ((crab.getX() < 0 || crab.getY() < 0)))
+            {
+                crab.setX(1);
+                temp = (float) (Math.random() * (c.getHeight() - 100));
+                crab.setY(temp);
+                crab.move(1000, temp);
+            }
+
+            //handles bird spawning
+            if(System.currentTimeMillis() - temp > 5000) {
+                bird.setX(0);
+                bird.setY((float) (Math.random() * (c.getHeight() - 100)));
+                temp = System.currentTimeMillis();
+            }
+
             draw(c);
             holder.unlockCanvasAndPost(c);
         }
@@ -67,6 +79,7 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
         //draws the character
         c.drawBitmap(crab.getImage(),crab.getX() - (crab.getImage().getWidth()/2), crab.getY() - (crab.getImage().getHeight()/2), null);
         c.drawBitmap(turtle.getImage(), turtle.getX() - (turtle.getImage().getWidth()/2), turtle.getY() - (turtle.getImage().getHeight()/2), null);
+        c.drawBitmap(bird.getImage(),bird.getX() - (bird.getImage().getWidth()/2), bird.getY() - (bird.getImage().getHeight()/2), null);
 
     }
     public void moveCharacter(Character moveMe)
@@ -81,6 +94,19 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
         {
             moveMe.setX(moveMe.getX() + ((float) Math.cos(angle) * moveMe.getSpeed()));
             moveMe.setY(moveMe.getY() + ((float) Math.sin(angle) * moveMe.getSpeed()));
+        }
+    }
+
+    //hit detection
+    public boolean checkCollision(Character firstChar, Character secondChar)
+    {
+        if(firstChar.getX() >= secondChar.getX() && firstChar.getX() <= (secondChar.getX() + secondChar.getImage().getWidth()) && firstChar.getY() <= secondChar.getY() + secondChar.getImage().getHeight() && firstChar.getY() >= secondChar.getY())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
