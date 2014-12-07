@@ -1,79 +1,64 @@
 package coolstudios.turtlegame;
 
-import android.graphics.Point;
+import android.graphics.Bitmap;
 
 /**
  * Created by WilliamRandazzo on 12/1/2014.
  */
-public class Character
-{
-    int size;
-    int speed;
-    Point position;
-    boolean isAlive;
-    Point destination;
+public class Character {
+    Bitmap image;
+    final float speed = 10;
+    float x, y, desX, desY;
 
     //Empty Constructor, sets everything to zero.
-    public Character()
-    {
-        size = 0;
-        speed = 0;
-        position = new Point(0,0);
-        destination = new Point(0,0);
-        isAlive = false;
+    public Character() {
+        x = 0;
+        y = 0;
+        desX = 0;
+        desY = 0;
     }
 
     //general constructor, allows you to set all of a character's variables.
-    public Character(int newSize, int newSpeed, int xPos, int yPos, boolean deadOrAlive)
-    {
-        isAlive = deadOrAlive;
-        size = newSize;
-        speed = newSpeed;
-        position = new Point(xPos, yPos);
-        destination = new Point(0,0);
+    public Character(float xPos, float yPos, Bitmap newImage) {
+        image = newImage;
+        x = xPos;
+        y = yPos;
     }
 
-
-    //SET AND GET METHODS -------------------------------------------------------------------
-    public int getSize() {
-        return size;
+    public Bitmap getImage() {
+        return image;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public float getDesX() {
+        return desX;
     }
 
-    public int getSpeed() {
+    public float getDesY() {
+        return desY;
+    }
+
+    public float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public float getX() {
+        return x;
     }
 
-    public void setPosition(Point position) {
-        this.position = position;
+    public float getY() {
+        return y;
     }
 
-    public Point getPosition() {
-        return position;
+    public void setX(float x) {
+        this.x = x;
     }
 
-
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    public void setY(float y) {
+        this.y = y;
     }
-
-    public boolean getAlive()
+    public void move(float newX, float newY)
     {
-        return isAlive;
+        desX = newX;
+        desY = newY;
     }
-
-    //--------------------------------------------------------------------------------------
-
-    public void move(Point goHere)
-    {
-        destination = goHere;
-    }
-
 }
