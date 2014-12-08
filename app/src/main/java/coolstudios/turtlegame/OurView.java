@@ -3,13 +3,10 @@ package coolstudios.turtlegame;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-
-import java.util.ArrayList;
 
 public class OurView extends SurfaceView implements Runnable, View.OnTouchListener {
 
@@ -20,17 +17,23 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
     Character crab;
     Character turtle;
     Character bird;
+    Character bomb;
     float temp;
+    long follow, countdown, explode;
 
 
     public OurView(Context context){
         super(context);
         holder = getHolder();
 
+
         //first spawn for the characters
-        turtle = new Character(0, 0, 0, 0, 10, BitmapFactory.decodeResource(getResources(), R.drawable.turtle));
-        crab = new Character(0, 150, 1000, 150, 7, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-        bird = new Character(200, 400, turtle.getX(), turtle.getY(), 7, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+        turtle = new Character(300, 500, 300, 500, 15, BitmapFactory.decodeResource(getResources(), R.drawable.turtle));
+        crab = new Character(0, 150, 1000, 150, 15, BitmapFactory.decodeResource(getResources(), R.drawable.crab));
+        bird = new Character(200, 400, turtle.getX(), turtle.getY(), 10, BitmapFactory.decodeResource(getResources(), R.drawable.bird));
+        bomb = new Character(500, 700, 500, 700, 0, BitmapFactory.decodeResource(getResources(), R.drawable.bomb));
+        countdown = System.currentTimeMillis();
+        follow = System.currentTimeMillis();
         setOnTouchListener(this);
     }
 
@@ -50,10 +53,10 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
             moveCharacter(bird);
 
             //checkCollision returns true if hit, and isItOK needs to be false to stop
-            isItOK = !checkCollision(turtle, crab);
-            isItOK = !checkCollision(turtle, bird);
+            //isItOK = !checkCollision(turtle, crab);
+            //isItOK = !checkCollision(turtle, bird);
 
-            //Respawns the crab on the other side of the map
+            //Respawns the crab on the other side of the map -----------------------------
             if((crab.getX() > c.getWidth() || crab.getX() > c.getHeight()) || ((crab.getX() < 0 || crab.getY() < 0)))
             {
                 crab.setX(1);
@@ -61,13 +64,34 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
                 crab.setY(temp);
                 crab.move(1000, temp);
             }
+            //--------------------------------------------------------------------------
 
-            //handles bird spawning
-            if(System.currentTimeMillis() - temp > 5000) {
+            //handles bird spawning ---------------------------------
+            if(System.currentTimeMillis() - follow > 7000) {
                 bird.setX(0);
                 bird.setY((float) (Math.random() * (c.getHeight() - 100)));
-                temp = System.currentTimeMillis();
+                follow = System.currentTimeMillis();
             }
+            //--------------------------------------------------
+
+            //handles bomb stuff --------------------------------------
+            if (bomb.isAlive() && System.currentTimeMillis() - countdown > 3000) {
+                explode = System.currentTimeMillis();
+                bomb.setAlive(false);
+                bomb.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.explode));
+            }
+
+            if(!bomb.isAlive() && System.currentTimeMillis() - explode > 700)//resets bomb
+            {
+                bomb.setAlive(true);
+                bomb.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.bomb));
+                bomb.setX((float)(Math.random() * (c.getWidth()-bomb.getImage().getWidth())));
+                bomb.setY((float)(Math.random() * (c.getHeight()-bomb.getImage().getHeight())));
+
+                countdown = System.currentTimeMillis();
+                explode = 0;
+            }
+            //------------------------------------------------------------
 
             draw(c);
             holder.unlockCanvasAndPost(c);
@@ -80,6 +104,7 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
         c.drawBitmap(crab.getImage(),crab.getX() - (crab.getImage().getWidth()/2), crab.getY() - (crab.getImage().getHeight()/2), null);
         c.drawBitmap(turtle.getImage(), turtle.getX() - (turtle.getImage().getWidth()/2), turtle.getY() - (turtle.getImage().getHeight()/2), null);
         c.drawBitmap(bird.getImage(),bird.getX() - (bird.getImage().getWidth()/2), bird.getY() - (bird.getImage().getHeight()/2), null);
+        c.drawBitmap(bomb.getImage(),bomb.getX() - (bomb.getImage().getWidth()/2), bomb.getY() - (bomb.getImage().getHeight()/2), null);
 
     }
     public void moveCharacter(Character moveMe)

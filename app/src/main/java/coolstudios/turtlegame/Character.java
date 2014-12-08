@@ -3,8 +3,9 @@ package coolstudios.turtlegame;
 import android.graphics.Bitmap;
 
 public class Character {
-    Bitmap image;
-    float x, y, desX, desY, speed;
+    private Bitmap image;
+    private float x, y, desX, desY, speed;
+    private boolean isAlive;
 
     //Empty Constructor, sets everything to zero.
     public Character() {
@@ -13,6 +14,7 @@ public class Character {
         desX = 0;
         desY = 0;
         speed = 0;
+        isAlive = false;
     }
 
     //general constructor, allows you to set all of a character's variables.
@@ -23,6 +25,7 @@ public class Character {
         desX = newDesX;
         desY = newDesY;
         speed = newSpeed;
+        isAlive = true;
     }
 
 
@@ -49,6 +52,14 @@ public class Character {
 
     public float getY() {
         return y;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
     }
 
     public void setX(float x) {
