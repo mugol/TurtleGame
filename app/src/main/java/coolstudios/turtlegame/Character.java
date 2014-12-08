@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 public class Character {
     private Bitmap image;
-    private float x, y, desX, desY, speed;
+    private float x, y, desX, desY, speed, size;
     private boolean isAlive;
 
     //Empty Constructor, sets everything to zero.
@@ -15,16 +15,18 @@ public class Character {
         desY = 0;
         speed = 0;
         isAlive = false;
+        size = 0;
     }
 
     //general constructor, allows you to set all of a character's variables.
-    public Character(float xPos, float yPos, float newDesX, float newDesY, float newSpeed, Bitmap newImage) {
+    public Character(float xPos, float yPos, float newDesX, float newDesY, float newSpeed, float newSize, Bitmap newImage) {
         image = newImage;
         x = xPos;
         y = yPos;
         desX = newDesX;
         desY = newDesY;
         speed = newSpeed;
+        size = newSize;
         isAlive = true;
     }
 
@@ -54,12 +56,20 @@ public class Character {
         return y;
     }
 
+    public float getSize() {
+        return size;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }
 
     public void setAlive(boolean isAlive) {
         this.isAlive = isAlive;
+    }
+
+    public void setSize(float size) {
+        this.size = size;
     }
 
     public void setX(float x) {
