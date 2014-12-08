@@ -47,7 +47,7 @@ public class MyActivity extends Activity {
 
     public void survivalMode (View view)
     {
-        Intent survivalGame = new Intent(this, SurvivalModeActivity.class);
+        Intent survivalGame = new Intent(this, StoryModeActivity.class);
         startActivity(survivalGame);
     }
 

@@ -3,6 +3,8 @@ package coolstudios.turtlegame;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,7 +21,8 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
     Character bird;
     Character bomb;
     float temp;
-    long follow, countdown, explode;
+    long follow, countdown, explode, points;
+    Paint ptext;
 
 
     public OurView(Context context){
@@ -34,6 +37,11 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
         bomb = new Character(500, 700, 500, 700, 0, 0, BitmapFactory.decodeResource(getResources(), R.drawable.bomb));
         countdown = System.currentTimeMillis();
         follow = System.currentTimeMillis();
+        points = System.currentTimeMillis();
+        ptext = new Paint();
+        ptext.setColor(Color.BLACK);
+        ptext.setTextSize(42);
+
         setOnTouchListener(this);
     }
 
@@ -51,6 +59,7 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
             //birds needs turtle's location constantly
             bird.move(turtle.getX(),turtle.getY());
             moveCharacter(bird);
+
 
             //checkCollision returns true if hit, and isItOK needs to be false to stop
             if((checkCollision(turtle, crab) || checkCollision(turtle, bird)) || (checkCollision(turtle,bomb)) )
@@ -109,6 +118,9 @@ public class OurView extends SurfaceView implements Runnable, View.OnTouchListen
         c.drawBitmap(turtle.getImage(), turtle.getX() - (turtle.getImage().getWidth()/2), turtle.getY() - (turtle.getImage().getHeight()/2), null);
         c.drawBitmap(bird.getImage(), bird.getX() - (bird.getImage().getWidth()/2), bird.getY() - (bird.getImage().getHeight()/2), null);
         c.drawBitmap(bomb.getImage(), bomb.getX() - (bomb.getImage().getWidth()/2), bomb.getY() - (bomb.getImage().getHeight()/2), null);
+
+        //draws text for points (just a timer)
+        c.drawText("POINTS: " + (System.currentTimeMillis() - points), 250, 1075, ptext);
 
     }
     public void moveCharacter(Character moveMe)
